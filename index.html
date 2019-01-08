@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+  <title>link rel=preload imagesrcset / imagesizes demo</title>
+  <link id="link" rel="preload" as="image" href="640.png" imagesrcset="640.png 640w, 800.png 800w, 1024.png 1024w" imagesizes="100vw">
+</head>
+<body>
+  <p>This page preloads one of these images:</p>
+    <ul>
+      <li>640.png</li>
+      <li>800.png</li>
+      <li>1024.png</li>
+    </ul>
+  <p>depending on your viewport width and pixel density.</p>
+  <pre id="message"></pre>
+  <div><button onclick="showImage()">Show Image</button></div>
+
+  <script>
+    let link = document.getElementById('link');
+    let message = document.getElementById('message');
+    if (link.imageSrcset === undefined) {
+        message.innerText = 'This browser does not support imagesrcset / imagesizes.';
+    } else {
+        message.innerText = 'Preloading a responsive image...';
+        link.onload = () => {
+            for (let e of performance.getEntriesByType('resource')) {
+                if (e.name.indexOf('.png') > 0)
+                    message.innerText = ' Preloaded ' + e.name
+            }
+        }
+    }
+
+    function showImage() {
+        let img = document.createElement('img');
+        img.src = link.href;
+        img.srcset = link.getAttribute('imagesrcset');
+        img.sizes = link.getAttribute('imagesizes');
+        document.body.appendChild(img);
+    }
+  </script>
+</body>
