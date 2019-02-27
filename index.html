@@ -30,11 +30,9 @@
     }
 
     function showImage() {
-        let img = document.createElement('img');
-        img.src = link.href;
-        img.srcset = link.getAttribute('imagesrcset');
-        img.sizes = link.getAttribute('imagesizes');
-        document.body.appendChild(img);
+        let div = document.createElement('div');
+        div.style.backgroundImage = '-webkit-image-set(url(640.png) 1x, url(800.png) 1.5x, url(1024.png) 2x)';
+        document.body.appendChild(div);
     }
   </script>
 </body>
