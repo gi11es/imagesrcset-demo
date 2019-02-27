@@ -32,6 +32,9 @@
     function showImage() {
         let div = document.createElement('div');
         div.style.backgroundImage = '-webkit-image-set(url(640.png) 1x, url(800.png) 1.5x, url(1024.png) 2x)';
+        div.style.width = '135px';
+        div.style.height = '100px';
+        div.style.backgroundSize = '135px auto';
         document.body.appendChild(div);
     }
   </script>
